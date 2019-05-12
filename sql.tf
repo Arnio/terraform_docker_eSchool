@@ -2,12 +2,13 @@ data "null_data_source" "auth_mysql_allowed_1" {
   count  = "${var.countnat}"
   inputs = {
     name  = "nat-${count.index + 1}"
-    value = "${element(google_compute_address.address.*.address, count.index)}"
+    value = "${element(google_compute_global_address.my_global_address.*.address, count.index)}"
     
   }
 }
 resource "random_id" "db_name_id" {
   byte_length = 4
+
 }
 resource "google_sql_database_instance" "instance" {
     name               = "${var.project}-${var.db_instance_name}-${random_id.db_name_id.hex}"

@@ -25,12 +25,15 @@ resource "google_compute_router" "router" {
   }
 }
 
-resource "google_compute_address" "address" {
-#  count  = 0
-#  count  = "${var.countnat}"
-#  name   = "nat-external-address-${count.index}"
-  name   = "ip-external-address"
-  region = "${var.region}"
+# resource "google_compute_address" "address" {
+# #  count  = 0
+# #  count  = "${var.countnat}"
+# #  name   = "nat-external-address-${count.index}"
+#   name   = "ip-external-address"
+#   region = "${var.region}"
+# }
+resource "google_compute_global_address" "my_global_address" {
+    name   = "ip-global-address"
 }
 # resource "google_compute_router_nat" "simple-nat" {
 #   name                               = "nat-1"
@@ -44,6 +47,9 @@ resource "google_compute_address" "address" {
 #   name   = "external-address"
 #   region = "${var.region}"
 # }
+
+
+
 resource "google_dns_record_set" "app" {
   name = "eschool.${google_dns_managed_zone.app.dns_name}"
   type = "A"
@@ -51,7 +57,7 @@ resource "google_dns_record_set" "app" {
 
   managed_zone = "${google_dns_managed_zone.app.name}"
 
-  rrdatas = ["${google_compute_address.address.address}"]
+  rrdatas = ["${google_compute_global_address.my_global_address.address}"]
 }
 
 resource "google_dns_managed_zone" "app" {

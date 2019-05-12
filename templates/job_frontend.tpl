@@ -57,7 +57,7 @@ sonar.sources=.</properties>
 cp -r /tmp/ansible/kubernetes $WORKSPACE/</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>sed -i -e s+https://fierce-shore-32592.herokuapp.com+http://${lb_backend}+g /var/lib/jenkins/workspace/job_frontend/src/app/services/token-interceptor.service.ts
+      <command>sed -i -e s+https://fierce-shore-32592.herokuapp.com+http://${lb_backend}:8080+g /var/lib/jenkins/workspace/job_frontend/src/app/services/token-interceptor.service.ts
 yarn install
 ng build --prod
 </command>

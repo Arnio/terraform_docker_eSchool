@@ -5,7 +5,7 @@ metadata:
   labels:
     app: eschool-backend
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       name: eschool-backend
@@ -27,7 +27,7 @@ spec:
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.11
         command: ["/cloud_sql_proxy", "--dir=/cloudsql",
-                  "-instances=lyrical-chassis-232614:us-central1:lyrical-chassis-232614-db-eschool24=tcp:3306",
+                  "-instances=lyrical-chassis-232614:us-central1:lyrical-chassis-232614-db-eschool-e11232dc=tcp:3306",
                   "-credential_file=/secrets/cloudsql/credentials.json"]
         volumeMounts:
           - name: cloudsql-instance-credentials
