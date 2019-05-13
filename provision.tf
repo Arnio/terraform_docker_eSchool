@@ -39,9 +39,21 @@ resource "null_resource" remoteExecProvisionerWFolder {
     content = "${data.template_file.job_backend.rendered}"
     destination = "/tmp/ansible/files/job_backend.xml"
   }
+   provisioner "file" {
+    content = "${data.template_file.deployment_backend.rendered}"
+    destination = "/tmp/ansible/kubernetes/deployment-backend.yml"
+  }
 
+   provisioner "file" {
+    content = "${data.template_file.deployment_frontend.rendered}"
+    destination = "/tmp/ansible/kubernetes/deployment-frontend.yml"
+  }
+
+   provisioner "file" {
+    content = "${data.template_file.service-backend.rendered}"
+    destination = "/tmp/ansible/kubernetes/service-backend.yml"
+  }
 }
-
 
 resource "null_resource" inventoryFileWeb {
   depends_on = ["null_resource.remoteExecProvisionerWFolder"]

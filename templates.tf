@@ -33,3 +33,24 @@ data "template_file" "job_backend" {
     project = "${var.project}"
   }
 }
+data "template_file" "deployment_backend" {
+  template = "${file("${path.module}/templates/deployment-backend.yml.tpl")}"
+  depends_on = ["google_sql_database_instance.instance"]
+  vars {
+    project = "${var.project}"
+    region  = "${var.region}"
+    sql_instans_name = "${google_sql_database_instance.instance.name}"
+  }
+}
+data "template_file" "deployment_frontend" {
+  template = "${file("${path.module}/templates/deployment-frontend.yml.tpl")}"
+  vars {
+    project = "${var.project}"
+  }
+}
+data "template_file" "service-backend" {
+  template = "${file("${path.module}/templates/service-backend.yml.tpl")}"
+  vars {
+    lb_backend = "${google_compute_global_address.my_global_address.address}"
+  }
+}

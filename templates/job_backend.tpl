@@ -130,7 +130,6 @@ kubectl create secret generic cloudsql-instance-credentials --from-file=credenti
 kubectl create secret generic cloudsql-db-credentials --from-literal=username=root --from-literal=password=devops095eSchool
 kubectl apply -f kubernetes/deployment-backend.yml
 kubectl apply -f kubernetes/service-backend.yml
-kubectl apply -f kubernetes/ingress-eschool.yml
 </execCommand>
                   <execTimeout>150000</execTimeout>
                   <usePty>false</usePty>

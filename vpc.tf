@@ -50,20 +50,20 @@ resource "google_compute_global_address" "my_global_address" {
 
 
 
-resource "google_dns_record_set" "app" {
-  name = "eschool.${google_dns_managed_zone.app.dns_name}"
-  type = "A"
-  ttl  = 300
+# resource "google_dns_record_set" "app" {
+#   name = "eschool.${google_dns_managed_zone.app.dns_name}"
+#   type = "A"
+#   ttl  = 300
 
-  managed_zone = "${google_dns_managed_zone.app.name}"
+#   managed_zone = "${google_dns_managed_zone.app.name}"
 
-  rrdatas = ["${google_compute_global_address.my_global_address.address}"]
-}
+#   rrdatas = ["${google_compute_global_address.my_global_address.address}"]
+# }
 
-resource "google_dns_managed_zone" "app" {
-  name     = "app-zone"
-  dns_name = "app.devops095.com."
-}
+# resource "google_dns_managed_zone" "app" {
+#   name     = "app-zone"
+#   dns_name = "app.devops095.com."
+# }
 
 resource "google_compute_firewall" "ssh_firewall" {
   name    = "allow-ssh"
